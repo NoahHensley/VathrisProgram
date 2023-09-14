@@ -232,8 +232,9 @@ def start_program():
             print("8. Sneak Chance")
             print("9. Calculate Skills & Professions")
             print("10. Check Soul Shard Drop")
-            print("11. Go Back")
-            num = get_input("int", [1, 11])
+            print("11. Weapon Contest")
+            print("12. Go Back")
+            num = get_input("int", [1, 12])
 
             if num == 1:
                 if not len(players) == 0:
@@ -636,17 +637,79 @@ def start_program():
                 else:
                     print("No soul shard has been dropped.")
 
-            elif num == -1337:
+            elif num == 11:
                 print("What are you contesting for?")
                 print("1. Ranged Weapon")
                 print("2. One-Handed Weapon")
                 print("3. Two-Handed Weapon")
                 contest_weapon = get_input("int", [1, 3])
 
-                if contest_weapon == 1:
-                    pass
+                if not len(players) == 0:
+                    data_choice = str(input("Use saved player data? y/n: "))
+                    if data_choice == "n":
+                        data_choice = False
+                    else:
+                        data_choice = True
+                else:
+                    data_choice = False
 
-            elif num == 11:
+                if data_choice:
+                    name_recognized = False
+                    print("What is the player's name?")
+                    while not name_recognized:
+                        player_name_choice = get_input("string")
+                        for player in players:
+                            if player.name == player_name_choice:
+                                name_recognized = True
+                                player_in_combat = player
+                        if not name_recognized:
+                            print("That name is not recognized. Try again.")
+
+                    print("Is " + player_in_combat.name + " the attacker or the target?")
+                    print("1. Attacker")
+                    print("2. Target")
+                    it_choice = get_input("int", [1, 2])
+
+                    # When player is attacker
+                    if it_choice == 1:
+                        s = player_in_combat.get_stat("Strength")
+                        a = player_in_combat.get_stat("Dexterity")
+
+                        print("Target strength?")
+                        ts = get_input("int")
+                        print("Target agility?")
+                        ta = get_input("int")
+
+                    # When player is target
+                    elif it_choice == 2:
+                        ts = player_in_combat.get_stat("Strength")
+                        ta = player_in_combat.get_stat("Dexterity")
+
+                        print("Attacker strength?")
+                        s = get_input("int")
+                        print("Attacker agility?")
+                        a = get_input("int")
+                else:
+                    print("Attacker strength?")
+                    s = get_input("int")
+                    print("Attacker agility?")
+                    a = get_input("int")
+                    print("Target strength?")
+                    ts = get_input("int")
+                    print("Target agility?")
+                    ta = get_input("int")
+
+                a_modifier = str(s + a)
+                t_modifier = str(ts + ta)
+
+                if contest_weapon == 1:  # Ranged
+                    print("1d10 + " + a_modifier + " >= 1d8 + " + t_modifier)
+                elif contest_weapon == 2:  # One-Handed Weapon
+                    print(a_modifier + " >= 1d6 + " + t_modifier)
+                elif contest_weapon == 3:  # Two-Handed Weapon
+                    print(a_modifier + " >= 1d10 + " + t_modifier)
+
+            elif num == 12:
                 access_calculations = False
             print("-----------------------------------")
 
