@@ -258,12 +258,12 @@ def start_program():
                     is_player = False
                     for player in players:
                         if player.name == sequence_combatants[a]:
-                            agility = player.get_stat("Dexterity")
+                            dexterity = player.get_stat("Dexterity")
                             is_player = True
                     if not is_player or not data_choice:
-                        print("What is " + sequence_combatants[a] + "'s agility?")
-                        agility = get_input("int")
-                    ind_sequence = random.uniform(0, 7) + agility
+                        print("What is " + sequence_combatants[a] + "'s dexterity?")
+                        dexterity = get_input("int")
+                    ind_sequence = random.uniform(0, 7) + dexterity
                     combatant_sequence.append(ind_sequence)
                 for a in range(0, player_num):
                     print(sequence_combatants[a] + "'s sequence is " + str(round(combatant_sequence[a], 2)))
@@ -299,7 +299,7 @@ def start_program():
                     if it_choice == 1:
                         p = player_in_combat.get_stat("Perception")
 
-                        print("Target agility?")
+                        print("Target dexterity?")
                         ea = get_input("int")
                         print("Distance from " + player_in_combat.name + " to target?")
                         m = get_input("int", [0, 2147483647])
@@ -322,7 +322,7 @@ def start_program():
                 else:
                     print("Attacker perception?")
                     p = get_input("int")
-                    print("Target agility?")
+                    print("Target dexterity?")
                     ea = get_input("int")
                     print("Distance from attacker to target?")
                     m = get_input("int", [0, 2147483647])
@@ -353,7 +353,7 @@ def start_program():
                 hit_choice = get_input("int", [1, 2])
 
                 if hit_choice == 2:
-                    print("How many other targets are in the initiator's line of sight?")
+                    print("How many other targets are in the attacker's line of sight?")
                     num_of_nearby = get_input("int", [0, 2147483647])
                     nearby_targets = []
                     for n in range(num_of_nearby):
@@ -401,21 +401,21 @@ def start_program():
                         pa = player_in_combat.get_stat("Dexterity")
                         p = player_in_combat.get_stat("Perception")
 
-                        print("Agility of target?")
+                        print("Dexterity of target?")
                         ea = get_input("int")
 
                     # When player is target
                     elif it_choice == 2:
                         ea = player_in_combat.get_stat("Dexterity")
 
-                        print("Agility of attacker?")
+                        print("Dexterity of attacker?")
                         pa = get_input("int")
                         print("Perception of attacker?")
                         p = get_input("int")
                 else:
-                    print("Agility of target?")
+                    print("Dexterity of target?")
                     ea = get_input("int")
-                    print("Agility of attacker?")
+                    print("Dexterity of attacker?")
                     pa = get_input("int")
                     print("Perception of attacker?")
                     p = get_input("int")
@@ -466,7 +466,7 @@ def start_program():
                         a = player_in_combat.get_stat("Dexterity")
                         s = player_in_combat.get_stat("Strength")
 
-                        print("What is the target's agility?")
+                        print("What is the target's dexterity?")
                         ea = get_input("int")
                         print("What is the target's strength?")
                         es = get_input("int")
@@ -476,16 +476,16 @@ def start_program():
                         ea = player_in_combat.get_stat("Dexterity")
                         es = player_in_combat.get_stat("Strength")
 
-                        print("What is the attacker's agility?")
+                        print("What is the attacker's dexterity?")
                         a = get_input("int")
                         print("What is the attacker's strength?")
                         s = get_input("int")
                 else:
-                    print("What is the attacker's agility?")
+                    print("What is the attacker's dexterity?")
                     a = get_input("int")
                     print("What is the attacker's strength?")
                     s = get_input("int")
-                    print("What is the target's agility?")
+                    print("What is the target's dexterity?")
                     ea = get_input("int")
                     print("What is the target's strength?")
                     es = get_input("int")
@@ -575,19 +575,19 @@ def start_program():
                 endurance = get_input("int")
                 print("What is the player's Charisma?")
                 charisma = get_input("int")
-                print("What is the player's Agility?")
-                agility = get_input("int")
+                print("What is the player's Dexterity?")
+                dexterity = get_input("int")
                 print("What is the player's Intelligence?")
                 intelligence = get_input("int")
                 print("What is the player's Attunement?")
                 attunement = get_input("int")
 
-                sneak = agility * 3
-                lockpicking = intelligence + perception + agility
+                sneak = dexterity * 3
+                lockpicking = intelligence + perception + dexterity
                 survival = endurance * 2 + intelligence
                 medicine = perception * 2 + intelligence * 2
-                pickpocketing = agility * 3
-                throwing = agility + perception + strength
+                pickpocketing = dexterity * 3
+                throwing = dexterity + perception + strength
                 fishing = perception * 2 + intelligence
 
                 alchemy = intelligence * 2 + attunement
@@ -677,7 +677,7 @@ def start_program():
 
                         print("Target strength?")
                         ts = get_input("int")
-                        print("Target agility?")
+                        print("Target dexterity?")
                         ta = get_input("int")
 
                     # When player is target
@@ -687,16 +687,16 @@ def start_program():
 
                         print("Attacker strength?")
                         s = get_input("int")
-                        print("Attacker agility?")
+                        print("Attacker dexterity?")
                         a = get_input("int")
                 else:
                     print("Attacker strength?")
                     s = get_input("int")
-                    print("Attacker agility?")
+                    print("Attacker dexterity?")
                     a = get_input("int")
                     print("Target strength?")
                     ts = get_input("int")
-                    print("Target agility?")
+                    print("Target dexterity?")
                     ta = get_input("int")
 
                 a_modifier = str(s + a)
