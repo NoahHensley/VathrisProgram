@@ -27,8 +27,8 @@ class Enemy:
             potential_drops.remove(drop)
         return potential_drops
 
-    def print_info(self):
-        print(self.name)
+    def print_info(self, quantity = 1):
+        print(self.name + " (" + str(quantity) + ")")
         print("Level: " + str(self.level))
         print("Health: " + str(self.maxHealth))
         print(self.drops)

@@ -11,6 +11,7 @@ def start_program():
     access_charactersheets = False
     access_calculations = False
     access_enemy_generation = False
+    access_travel_encounter = False
 
     set_original_soul_shard_chance = 0.005
     # original_soul_shard_chance
@@ -24,8 +25,9 @@ def start_program():
         print("1. Access Character Sheets")
         print("2. Perform Calculation")
         print("3. Generate Enemy")
-        print("4. Exit")
-        choice = get_input("int", [1, 4])
+        print("4. Generate Travel Encounter")
+        print("5. Exit")
+        choice = get_input("int", [1, 5])
         if choice == 1:
             access_charactersheets = True
         elif choice == 2:
@@ -33,6 +35,8 @@ def start_program():
         elif choice == 3:
             access_enemy_generation = True
         elif choice == 4:
+            access_travel_encounter = True
+        elif choice == 5:
             if len(players) > 0:
                 confirming_exit = True
             else:
@@ -219,6 +223,140 @@ def start_program():
 
             if choice == 2:
                 access_enemy_generation = False
+
+        while access_travel_encounter:
+            print("Which zone would you like to generate a travel encounter in?")
+            print("1. Gorson Plains")
+            print("2. Tideberth Caverns")
+            print("3. Jeran")
+            print("4. Exit")
+            num = get_input("int", [1, 4])
+
+            if num == 1:  # Gorson Plains
+                print("To be implemented later")
+
+            elif num == 2:  # Tideberth Caverns
+                # Stream generation
+                # None
+
+                # Ore generation
+                ore_chance = 1.0/3
+                if random.uniform(0, 1) < ore_chance: ore = True
+                else: ore = False
+
+                if ore:
+                    chosen_ore = random.choice([
+                        ["Copper", random.randint(1, 3)],
+                        ["Iron", random.randint(1, 2)],
+                        ["Emerald", random.randint(1, 2)],
+                        ["Azure", random.randint(1, 2)],
+                        ["Amethyst", 1]
+                    ])
+
+                # Enemy generation
+                # None
+
+                # Herb generation
+                herb_chance = 0.2
+                if random.uniform(0, 1) < herb_chance:
+                    herb = True
+                else:
+                    herb = False
+
+                if herb:
+                    chosen_herb = random.choice([
+                        ["Dreamfoil", random.randint(1, 2)],
+                        ["Green Lotus", 1],
+                        ["Earthroot", random.randint(1, 2)],
+                        ["Crystalline Lotus", 1],
+                        ["Cavernous Snapping Plant", 2]
+                    ])
+
+                # Output
+                is_nothing = True
+                print("")
+                if ore:
+                    print(chosen_ore[0] + " - " + str(chosen_ore[1]))
+                    is_nothing = False
+                if herb:
+                    print(chosen_herb[0] + " - " + str(chosen_herb[1]))
+                    is_nothing = False
+
+                if is_nothing:
+                    print("Nothing has been encountered.")
+                print("")
+
+            elif num == 3:  # Jeran
+                # Stream generation
+                stream_chance = 0.5
+                if random.uniform(0, 1) < stream_chance: stream = True
+                else: stream = False
+
+                # Node generation
+                node_chance = 0.5
+                if random.uniform(0, 1) < node_chance: chosen_node_type = random.choice(["herb", "ore"])
+                else: chosen_node_type = None
+
+                if chosen_node_type == "herb":
+                    chosen_node = random.choice([
+                        ["Silverleaf", random.randint(1, 3)],
+                        ["Kingsfoil", random.randint(1, 3)],
+                        ["Dreamfoil", random.randint(1, 2)],
+                        ["Green Lotus", 1],
+                        ["Jeran Ivy", random.randint(1, 3)],
+                        ["Jeran Searing Bush", random.randint(1, 2)]
+                    ])
+                elif chosen_node_type == "ore":
+                    chosen_node = random.choice([
+                        ["Copper", random.randint(1, 3)],
+                        ["Tin", random.randint(1, 3)],
+                        ["Iron", random.randint(1, 2)]
+                    ])
+                else:
+                    chosen_node = None
+
+                # Enemy generation
+                enemies_spawn = []
+                enemy_chance = 0.5
+                if random.uniform(0, 1) < enemy_chance: enemy = True
+                else: enemy = False
+
+                if enemy:
+                    chosen_enemy = random.choice([
+                        "Jeran Python",
+                        "Jeran Flawn",
+                        "Agitated Orangutan"
+                    ])
+
+                    if chosen_enemy == "Jeran Python":
+                        enemies_spawn.append([JeranPython(), 1])
+                    elif chosen_enemy == "Jeran Flawn":
+                        enemies_spawn.append([JeranFlawn(), 1])
+                    elif chosen_enemy == "Agitated Orangutan":
+                        enemies_spawn.append([AgitatedOrangutan(), random.randint(2, 5)])
+
+
+                # Output
+                is_nothing = True
+                print("")
+                if stream:
+                    print("Stream")
+                    is_nothing = False
+                if chosen_node is not None:
+                    print(chosen_node[0] + " - " + str(chosen_node[1]))
+                    is_nothing = False
+                if len(enemies_spawn) != 0:
+                    if not is_nothing: print("")
+                    for enemy_spawn in enemies_spawn:
+                        enemy_spawn[0].print_info(enemy_spawn[1])
+                    is_nothing = False
+
+                if is_nothing:
+                    print("Nothing has been encountered.")
+                print("")
+
+            else:
+                access_travel_encounter = False
 
         while access_calculations:
             print("What would you like to calculate?")
