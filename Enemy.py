@@ -27,8 +27,8 @@ class Enemy:
             potential_drops.remove(drop)
         return potential_drops
 
-    def print_info(self, quantity = 1):
-        print(self.name + " (" + str(quantity) + ")")
+    def print_info(self):
+        print(self.name)
         print("Level: " + str(self.level))
         print("Health: " + str(self.maxHealth))
         print(self.drops)
@@ -705,3 +705,46 @@ class LargeGorsonAnt(Enemy):
         coins_drop = 0
 
         super().__init__(name, level, health, drops, coins_drop)
+
+
+def generate_enemy(enemy_input):
+    enemies = [
+        JeranPython(),
+        JeranFlawn(),
+        AgitatedOrangutan(),
+        Faethling(),
+        TallonArcher(),
+        TallonSoldier(),
+        TallonShipCaptain(),
+        GoblinKnifethrower(),
+        GoblinCamouflager(),
+        TallonMage(),
+        TallonWarlock(),
+        TallonMissionCommander(),
+        AmbolGuard(),
+        CommanderFinch(),
+        CrawlingCod(),
+        TideberthCavernNaga(),
+        TideberthAssassin(),
+        TideberthMage(),
+        TideberthSorcerer(),
+        TideberthCorrupter(),
+        TideberthCavernMonster(),
+        TideberthWaterElemental(),
+        TideberthMimic(),
+        HeadTideberthMagus(),
+        CavernousSnappingPlant(),
+        GorsonLion(),
+        GorsonKodo(),
+        LargeGorsonAnt()
+    ]
+
+    found_enemy = False
+    for enemy in enemies:
+        if enemy.name == enemy_input:
+            found_enemy = True
+            break
+
+    if found_enemy: return enemy
+    else: return None
+

@@ -177,45 +177,15 @@ def start_program():
                 access_charactersheets = False
 
         while access_enemy_generation:
-            enemies = [
-                JeranPython(),
-                JeranFlawn(),
-                AgitatedOrangutan(),
-                Faethling(),
-                TallonArcher(),
-                TallonSoldier(),
-                TallonShipCaptain(),
-                GoblinKnifethrower(),
-                GoblinCamouflager(),
-                TallonMage(),
-                TallonWarlock(),
-                TallonMissionCommander(),
-                AmbolGuard(),
-                CommanderFinch(),
-                CrawlingCod(),
-                TideberthCavernNaga(),
-                TideberthAssassin(),
-                TideberthMage(),
-                TideberthSorcerer(),
-                TideberthCorrupter(),
-                TideberthCavernMonster(),
-                TideberthWaterElemental(),
-                TideberthMimic(),
-                HeadTideberthMagus(),
-                CavernousSnappingPlant(),
-                GorsonLion(),
-                GorsonKodo(),
-                LargeGorsonAnt()
-            ]
-
             print("Which enemy would you like to generate?")
             enemy_name = get_input("string")
 
-            for enemy in enemies:
-                if enemy.name == enemy_name:
-                    break
+            enemy = generate_enemy(enemy_name)
 
-            enemy.print_info()
+            try:
+                enemy.print_info()
+            except Exception:
+                print("That enemy name is not recognized.")
 
             print("1. Generate Another")
             print("2. Go Back")
@@ -318,23 +288,18 @@ def start_program():
                 # Enemy generation
                 enemies_spawn = []
                 enemy_chance = 0.5
-                if random.uniform(0, 1) < enemy_chance: enemy = True
-                else: enemy = False
+                if random.uniform(0, 1) < enemy_chance: spawn_enemy = True
+                else: spawn_enemy = False
 
-                if enemy:
+                if spawn_enemy:
                     chosen_enemy = random.choice([
-                        "Jeran Python",
-                        "Jeran Flawn",
-                        "Agitated Orangutan"
+                        ["Jeran Python", 1],
+                        ["Jeran Flawn", 1],
+                        ["Agitated Orangutan", random.randint(2, 5)]
                     ])
 
-                    if chosen_enemy == "Jeran Python":
-                        enemies_spawn.append([JeranPython(), 1])
-                    elif chosen_enemy == "Jeran Flawn":
-                        enemies_spawn.append([JeranFlawn(), 1])
-                    elif chosen_enemy == "Agitated Orangutan":
-                        enemies_spawn.append([AgitatedOrangutan(), random.randint(2, 5)])
-
+                    for enemy in range(chosen_enemy[1]):
+                        enemies_spawn.append(generate_enemy(chosen_enemy[0]))
 
                 # Output
                 is_nothing = True
@@ -348,7 +313,10 @@ def start_program():
                 if len(enemies_spawn) != 0:
                     if not is_nothing: print("")
                     for enemy_spawn in enemies_spawn:
-                        enemy_spawn[0].print_info(enemy_spawn[1])
+                        enemy_spawn.print_info()
+                        # If not only or last element, prints newline to visually separate
+                        # enemy infos
+                        if enemy_spawn != enemies_spawn[-1]: print("")
                     is_nothing = False
 
                 if is_nothing:
