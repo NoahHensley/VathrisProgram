@@ -298,7 +298,7 @@ def start_program():
                         ["Agitated Orangutan", random.randint(2, 5)]
                     ])
 
-                    for enemy in range(chosen_enemy[1]):
+                    for _ in range(chosen_enemy[1]):
                         enemies_spawn.append(generate_enemy(chosen_enemy[0]))
 
                 # Output
