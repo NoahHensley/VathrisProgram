@@ -414,6 +414,7 @@ class TideberthCavernNaga(Enemy):
             ["Raw Copper", 1, 0.2],
             ["Raw Tin", 1, 0.2],
             ["Raw Iron", 1, 0.2],
+            ["Tideberth Cloth", 0.1, 0.2],
             ["Elongated Naga Spear", 1.8, 0.1]
         ])
         for drop in potential_drops:
@@ -430,10 +431,11 @@ class TideberthAssassin(Enemy):
         level = random.randint(4, 5)
         health = 20 + 2 * (level - 4)
 
-        drops = []
+        drops = [
+            ["Tideberth Cloth", 0.1, random.randint(0, 2)]
+        ]
 
         potential_drops = Enemy.calculate_potential_drops([
-            ["Weak Molotov Cocktail", 0.1, 0.5],
             ["Raw Copper", 1, 0.2],
             ["Raw Tin", 1, 0.2],
             ["Raw Iron", 1, 0.2],
@@ -454,10 +456,11 @@ class TideberthMage(Enemy):
         level = random.randint(4, 5)
         health = 18 + 2 * (level - 4)
 
-        drops = []
+        drops = [
+            ["Tideberth Cloth", 0.1, random.randint(0, 2)]
+        ]
 
         potential_drops = Enemy.calculate_potential_drops([
-            ["Weak Molotov Cocktail", 0.1, 0.5],
             ["Raw Copper", 1, 0.2],
             ["Raw Tin", 1, 0.2],
             ["Raw Iron", 1, 0.2],
@@ -478,10 +481,11 @@ class TideberthSorcerer(Enemy):
         level = random.randint(4, 5)
         health = 18 + 2 * (level - 4)
 
-        drops = []
+        drops = [
+            ["Tideberth Cloth", 0.1, random.randint(0, 2)]
+        ]
 
         potential_drops = Enemy.calculate_potential_drops([
-            ["Weak Molotov Cocktail", 0.1, 0.5],
             ["Raw Copper", 1, 0.2],
             ["Raw Tin", 1, 0.2],
             ["Raw Iron", 1, 0.2],
@@ -502,10 +506,11 @@ class TideberthCorrupter(Enemy):
         level = random.randint(5, 6)
         health = 24 + 2 * (level - 5)
 
-        drops = []
+        drops = [
+            ["Tideberth Cloth", 0.1, random.randint(0, 2)]
+        ]
 
         potential_drops = Enemy.calculate_potential_drops([
-            ["Weak Molotov Cocktail", 0.1, 0.5],
             ["Raw Copper", 1, 0.2],
             ["Raw Tin", 1, 0.2],
             ["Raw Iron", 1, 0.2],
@@ -574,7 +579,8 @@ class TideberthMimic(Enemy):
         health = 50
 
         drops = [
-            ["Pickaxe", 2, 3]
+            ["Pickaxe", 2, 3],
+            ["Tideberth Cloth", 0.1, random.randint(0, 2)]
         ]
 
         potential_drops = Enemy.calculate_potential_drops([
@@ -609,6 +615,7 @@ class HeadTideberthMagus(Enemy):
         health = 60
 
         drops = [
+            ["Tideberth Cloth", 0.1, random.randint(0, 2)],
             ["Violet Magus Turban", 0.7, 1]
         ]
 
