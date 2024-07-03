@@ -1,8 +1,23 @@
+import pickle, os
+
 from Globals import *
 
 
 class Player:
     def __init__(self):
+        print("What is the player's name?")
+        self.name = get_input("string")
+
+        self.filename = self.name + "_data.pkl"
+        if os.path.exists(self.filename):
+            self.load_data()
+            # Testing
+            print(self.filename + " exists.")
+            return
+
+        # Testing
+        print(self.filename + " does not exist.")
+
         self.inventory = []
         self.total_mass = 0
 
@@ -16,9 +31,6 @@ class Player:
             ["Attunement", 0]
         ]
         self.size = 0
-
-        print("What is the player's name?")
-        self.name = get_input("string")
 
         for i in range(len(self.stats)):
             print("What is " + self.name + "'s " + self.stats[i][0] + "?")
@@ -40,6 +52,8 @@ class Player:
                 finished = True
 
         self.calculate_total_mass()
+
+        self.save_data()
 
     def get_stat(self, stat_input):
         for stat in self.stats:
@@ -67,3 +81,25 @@ class Player:
         self.total_mass = 0
         for item in self.inventory:
             self.total_mass += item[1] * item[2]
+
+    def save_data(self):
+        saved_variables = [
+            self.stats,
+            self.size,
+            self.coins,
+            self.inventory,
+            self.total_mass
+        ]
+
+        with open(self.filename, "wb") as file:
+            pickle.dump(saved_variables, file)
+
+    def load_data(self):
+        with open(self.filename, "rb") as file:
+            loaded_variables = pickle.load(file)
+
+        self.stats = loaded_variables[0]
+        self.size = loaded_variables[1]
+        self.coins = loaded_variables[2]
+        self.inventory = loaded_variables[3]
+        self.total_mass = loaded_variables[4]

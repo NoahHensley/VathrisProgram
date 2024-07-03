@@ -26,7 +26,8 @@ def start_program():
         print("2. Perform Calculation")
         print("3. Generate Enemy")
         print("4. Generate Travel Encounter")
-        print("5. Exit")
+        print("5. Save All Data")
+        print("6. Exit")
         choice = get_input("int", [1, 5])
         if choice == 1:
             access_charactersheets = True
@@ -37,6 +38,9 @@ def start_program():
         elif choice == 4:
             access_travel_encounter = True
         elif choice == 5:
+            for player in players:
+                player.save_data()
+        elif choice == 6:
             if len(players) > 0:
                 confirming_exit = True
             else:
