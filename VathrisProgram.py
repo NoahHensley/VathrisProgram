@@ -28,7 +28,7 @@ def start_program():
         print("4. Generate Travel Encounter")
         print("5. Save All Data")
         print("6. Exit")
-        choice = get_input("int", [1, 5])
+        choice = get_input("int", [1, 6])
         if choice == 1:
             access_charactersheets = True
         elif choice == 2:
@@ -52,6 +52,9 @@ def start_program():
                 print("2. No")
                 choice = get_input("int", [1, 2])
                 if choice == 1:
+                    for player in players:
+                        player.save_data()
+
                     confirming_exit = False
                     in_program = False
                 elif choice == 2:
